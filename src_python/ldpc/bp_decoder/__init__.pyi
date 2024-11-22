@@ -3,7 +3,7 @@ import scipy.sparse
 from typing import Optional, List, Union
 import warnings
 import ldpc.helpers.scipy_helpers
-def io_test(pcm: Union[scipy.sparse.spmatrix,np.ndarray]):
+def io_test(pcm: Union[scipy.sparse.spmatrix,np.ndarray]): ...
 class BpDecoderBase:
     """
     Bp Decoder base class
@@ -51,9 +51,9 @@ class BpDecoderBase:
         """
 
 
-    def update_channel_probs(self, value: Union[List[float],np.ndarray]) -> None:
+    def update_channel_probs(self, value: Union[List[float],np.ndarray]) -> None: ...
     @property
-    def channel_probs(self) -> np.ndarray:
+    def channel_probs(self) -> np.ndarray: ...
     @property
     def input_vector_type(self)-> str:
         """
@@ -318,7 +318,7 @@ class BpDecoder(BpDecoderBase):
     """
 
 
-    def __init__(self, pcm: Union[np.ndarray, scipy.sparse.spmatrix], error_rate: Optional[float] = None,
+    def __init__(self, pcm: Union[np.ndarray, scipy.sparse.spmatrix], error_rate: Optional[float] = None) -> BpDecoder: ...
     def decode(self, input_vector: np.ndarray) -> np.ndarray:
         """
         Decode the input input_vector using belief propagation decoding algorithm.

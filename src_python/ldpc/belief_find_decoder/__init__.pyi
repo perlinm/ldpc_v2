@@ -73,4 +73,4 @@ class BeliefFindDecoder(BpDecoderBase):
 
 
     @property
-    def uf_method(self):
+    def uf_method(self): ...
