@@ -330,7 +330,7 @@ class BpDecoder(BpDecoderBase):
         omp_thread_count : Optional[int] = None,
         random_schedule_seed : Optional[int] = None,
         serial_schedule_order : Optional[List[int]] = None,
-        input_vector_type: str = ""
+        input_vector_type: str = "auto",
     ) -> BpDecoder: ...
 
     def decode(self, input_vector: np.ndarray) -> np.ndarray:
