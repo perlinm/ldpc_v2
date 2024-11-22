@@ -24,13 +24,12 @@ def generate_cython_stub_file(pyx_filepath: str, output_filepath: str) -> None:
     for match in pattern.finditer(pyx_content):
         pyi_content += pyx_content[match.start():match.end()]
 
-
     # identify patterns to ignore
     ignore_pattern = re.compile(r"__cinit__\(|__del__\(")
 
     # identify class or function declarations
     decorator = r"^\s*@.*\n"
-    declaration = r"^\s*(?:class|def)\s+.*:\s*\n"
+    declaration = r"^\s*(?:class|def)\s+.*(?:.|\n)\n"
     docstring_double = r"\"\"\"(?:.|\n)*?\"\"\""
     docstring_single = r"'''(?:.|\n)*?'''"
     docstring = rf"\s*(?:{docstring_double}|{docstring_single})\s*\n"
@@ -39,7 +38,12 @@ def generate_cython_stub_file(pyx_filepath: str, output_filepath: str) -> None:
         content = pyx_content[match.start():match.end()]
         if not ignore_pattern.match(content, re.MULTILINE):
             pyi_content += content.rstrip()
-            pyi_content += " ...\n" if match.group(3) is None else "\n"
+            if match.group(3):
+                # there is a docstring!
+                pyi_content += "\n"
+            else:
+                # there is no docstring
+                pyi_content += " ...\n"
 
     open(output_filepath, "w").write(pyi_content)
 
