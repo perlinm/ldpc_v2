@@ -318,7 +318,21 @@ class BpDecoder(BpDecoderBase):
     """
 
 
-    def __init__(self, pcm: Union[np.ndarray, scipy.sparse.spmatrix], error_rate: Optional[float] = None) -> BpDecoder: ...
+    def __init__(
+        self,
+        pcm: Union[np.ndarray, scipy.sparse.spmatrix],
+        error_rate: Optional[float] = None,
+        error_channel : Optional[list[float]] = None,
+        max_iter : Optional[int] = None,
+        bp_method : Optional[str] = None,
+        ms_scaling_factor : Optional[float] = None,
+        schedule : Optional[str] = None,
+        omp_thread_count : Optional[int] = None,
+        random_schedule_seed : Optional[int] = None,
+        serial_schedule_order : Optional[List[int]] = None,
+        input_vector_type: str = ""
+    ) -> BpDecoder: ...
+
     def decode(self, input_vector: np.ndarray) -> np.ndarray:
         """
         Decode the input input_vector using belief propagation decoding algorithm.
